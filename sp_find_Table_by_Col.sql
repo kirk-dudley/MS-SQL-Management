@@ -1,3 +1,6 @@
+USE master
+GO
+
 --DROP PROCEDURE SP_Find_Table_By_Col
 CREATE PROCEDURE SP_Find_Table_By_Col
 
@@ -18,9 +21,21 @@ FROM	SYS.objects SO
 		SYS.schemas SS
 			ON	SO.schema_id = SS.schema_id
 WHERE	SC.name = @Column
-ORDER BY SO.name
+ORDER BY SO.type 
+		,SS.name 
+		,SO.name 
 
-/*
+
+GO
+
+
 EXEC sys.sp_MS_marksystemobject SP_Find_Table_By_Col
 GO
-*/
+
+
+SELECT NAME, IS_MS_SHIPPED 
+FROM SYS.OBJECTS 
+WHERE NAME = 'SP_Find_Table_By_Col' 
+GO 
+
+
